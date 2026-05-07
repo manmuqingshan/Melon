@@ -466,7 +466,7 @@ void *mln_alloc_re(mln_alloc_t *pool, void *ptr, mln_size_t size)
 
     mln_u8ptr_t new_ptr = mln_alloc_m(pool, size);
     if (new_ptr == NULL) return NULL;
-    memcpy(new_ptr, ptr, old_blk->blk_size);
+    memcpy(new_ptr, ptr, old_blk->blk_size < size ? old_blk->blk_size : size);
     mln_alloc_free(ptr);
 
     return new_ptr;
